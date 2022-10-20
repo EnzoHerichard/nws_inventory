@@ -1,0 +1,39 @@
+version: '1.0'
+services:
+  node:
+    image: node:latest
+    volumes:
+      - ./client:/app
+    working_dir: /app/
+    command: npm start
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=mysql://db:3306
+    ports:
+      - "3000:3000"
+  api:
+    image: node:latest
+    working_dir: /server
+    volumes:
+      - ./server:/server
+    command: node index.js
+    depends_on:
+      - db
+    ports:
+      - 3001:3000
+  db:
+    volumes:
+      - db-data:/var/lib/mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: materials
+      MYSQL_USER: enzo
+      MYSQL_PASSWORD: enzo
+    restart: always
+volumes:
+  db-data:
+
+
+   
