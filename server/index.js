@@ -1,21 +1,25 @@
 const express = require('express');
 const app = express();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
+    host: 'db',
     user: 'root',
-    host: 'localhost',
+    password: 'root',
     database: 'nwsmaterials',
+    port: 3306
 });
+
+
 
 app.post('/create', (req,res) => {
     const name = req.body.name;
     const description = req.body.description;
-
+    console.log(req.body)
     db.query(
         'INSERT INTO materials (name, description) VALUES (?,?)',
         [name, description],
@@ -26,9 +30,16 @@ app.post('/create', (req,res) => {
                 res.send('Values inserted')
             }
 });
+});
+
+app.get('/', () => {
+    db.query(
+        'SELECT name, description FROM materials')
 
 });
 
+
+
 app.listen(3001, () => {
-    console.log('Server listening on port 3001');
+    console.log('Server listening on port 3001')
 })

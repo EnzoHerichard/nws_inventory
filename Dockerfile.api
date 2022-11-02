@@ -1,8 +1,7 @@
 FROM node:latest
 
-
-ADD . /app/
-WORKDIR /app/client/
+COPY ./server /app
+WORKDIR /app
 
 RUN npm install
 

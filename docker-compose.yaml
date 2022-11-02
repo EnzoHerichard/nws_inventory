@@ -1,39 +1,54 @@
-version: '1.0'
+version: '3'
 services:
-  node:
-    image: node:latest
-    volumes:
-      - ./client:/app
-    working_dir: /app/
+  app:
+    build: 
+      dockerfile: Dockerfile.app
+    working_dir: /app
     command: npm start
     depends_on:
       - db
     environment:
-      - DB_HOST=mysql://db:3306
+      DB_HOST: mysql://db:3306
     ports:
       - "3000:3000"
+    networks:
+      - frontend  
   api:
-    image: node:latest
-    working_dir: /server
-    volumes:
-      - ./server:/server
+    build:
+      dockerfile: Dockerfile.api
+    working_dir: /app
     command: node index.js
     depends_on:
       - db
     ports:
-      - 3001:3000
+      - "3001:3001"
+    networks:
+      - backend
+      - frontend  
   db:
     volumes:
       - db-data:/var/lib/mysql
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: materials
-      MYSQL_USER: enzo
-      MYSQL_PASSWORD: enzo
+    image: mysql:8
+    # command: --default-authentication-plugin=mysql_native_password
     restart: always
+    ports:
+      - "3306:3306"
+    environment:
+        MYSQL_DATABASE: 'nwsmaterials'
+        MYSQL_ROOT_PASSWORD: 'root'
+    networks:
+      - backend
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - backend
 volumes:
   db-data:
-
-
-   
+networks:
+  backend:
+  frontend:
