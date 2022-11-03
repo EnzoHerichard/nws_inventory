@@ -14,7 +14,9 @@ const db = mysql.createConnection({
     port: 3306
 });
 
-
+app.get('/', () => {
+    db.query('SELECT name, description FROM materials')
+});
 
 app.post('/create', (req,res) => {
     const name = req.body.name;
@@ -31,14 +33,6 @@ app.post('/create', (req,res) => {
             }
 });
 });
-
-app.get('/', () => {
-    db.query(
-        'SELECT name, description FROM materials')
-
-});
-
-
 
 app.listen(3001, () => {
     console.log('Server listening on port 3001')

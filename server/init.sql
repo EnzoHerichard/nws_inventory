@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS nwsmaterials;
+CREATE DATABASE nwsmaterials;
 --
 -- Structure de la table `materials`
 --

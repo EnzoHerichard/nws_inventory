@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Axios from 'axios';
 
 function GestionMaterial() {
     const [name, setName] = useState('');
@@ -14,9 +13,7 @@ function GestionMaterial() {
         }).then(() => {
             console.log("Success");
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     };
     const getMateriel = () => {
         fetch('http://localhost:3001/', {
