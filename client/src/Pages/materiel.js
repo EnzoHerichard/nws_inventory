@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Axios from "axios";
 import "../assets/style.css";
 
 function GestionMaterial() {
@@ -40,6 +39,16 @@ function GestionMaterial() {
                 );
             });
     }
+    const updateMaterials = () => {
+        fetch(`http://localhost:3001/update/${idmaterial}`,{
+            method: 'PUT',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name, description: description })
+        }).then(() => {
+            console.log("Success");
+
+        })
+    }
     return (
         <div className="container">
             <div className="row">
@@ -64,6 +73,7 @@ function GestionMaterial() {
                                     <td>{val.name}</td>
                                     <td>{val.description}</td>
                                     <button onClick={()=> {deleteMaterials(val.idmaterials)}}>Supprimer</button>
+                                    <button onClick={()=> {updateMaterials(val.idmaterials)}}>Modifier</button>
                                 </tr>
                                 
                         );

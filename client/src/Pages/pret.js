@@ -1,6 +1,12 @@
 import React from "react";
-
+import "../assets/style.css";
 function gestionPret(){
+    function addReservation(){
+
+    }
+    function geReservation(){
+        
+    }
     return (
         <div className="container">
             <div className="row">
