@@ -15,7 +15,7 @@ const db = mysql.createConnection({
 });
 
 app.get('/materials', (req,res) => {
-    db.query('SELECT name, description FROM materials',(err, result) => {
+    db.query('SELECT * FROM materials',(err, result) => {
         if (err) {
             console.log(err)
         } else {
@@ -38,6 +38,34 @@ app.post('/create', (req,res) => {
                 res.send('Values inserted')
             }
 });
+});
+
+app.put('/update', (req,res) => {
+    const id = req.body.idmaterials;
+    const name = req.body.name;
+    const description = req.body.description;
+    db.query(
+        'UPDATE materials SET name = ?, description = ? WHERE id = ?',
+        [name, description, id],
+        (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(result)
+            }
+        }
+    );
+});
+
+app.delete('/delete/:idmaterials', (req, res) => {
+    const idmaterials = req.params.idmaterials;
+    db.query('DELETE FROM materials WHERE idmaterials = ?', idmaterials, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
 });
 
 app.listen(3001, () => {

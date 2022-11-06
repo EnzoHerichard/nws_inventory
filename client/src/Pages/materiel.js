@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Axios from "axios";
 import "../assets/style.css";
 
 function GestionMaterial() {
@@ -26,6 +27,19 @@ function GestionMaterial() {
         }).then(response => response.json())
         .then(response => setMaterialsList(response))
     }
+    const deleteMaterials = (idmaterials) => {
+        fetch(`http://localhost:3001/delete/${idmaterials}`, {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" },
+        }).then(response => response.json())
+            .then((response) => {
+                setMaterialsList(
+                    materialsList.filter((val) => {
+                        return val.idmaterials != idmaterials;
+                    })
+                );
+            });
+    }
     return (
         <div className="container">
             <div className="row">
@@ -41,13 +55,15 @@ function GestionMaterial() {
                                 <tbody>
                                 <tr>
                                     <th>Nom</th>
-                                    <th>Description</th>
+                                    <th>Déscription</th>
+                                    <th>Action</th>
                                 </tr>
                     {materialsList.map((val,key)=> {
                         return (
                                 <tr>
                                     <td>{val.name}</td>
                                     <td>{val.description}</td>
+                                    <button onClick={()=> {deleteMaterials(val.idmaterials)}}>Supprimer</button>
                                 </tr>
                                 
                         );
