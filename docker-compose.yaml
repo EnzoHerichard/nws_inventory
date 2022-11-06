@@ -11,8 +11,8 @@ services:
       DB_HOST: mysql://db:3306
     ports:
       - "3000:3000"
-    # networks:
-    #   - frontend  
+    networks:
+      - frontend  
   api:
     build:
       dockerfile: Dockerfile.api
@@ -22,9 +22,9 @@ services:
       - db
     ports:
       - "3001:3001"
-    # networks:
-    #   - backend
-    #   - frontend  
+    networks:
+      - backend
+      - frontend  
   db:
     volumes:
       - db-data:/var/lib/mysql
@@ -36,8 +36,8 @@ services:
     environment:
         MYSQL_DATABASE: 'nwsmaterials'
         MYSQL_ROOT_PASSWORD: 'root'
-    # networks:
-    #   - backend
+    networks:
+      - backend
     
   adminer:
     image: adminer
@@ -46,8 +46,10 @@ services:
       - 8030:8080
     depends_on: 
       - db
+    networks:
+      - backend
 volumes:
   db-data:
-# networks:
-#   backend:
-#   frontend:
+networks:
+  backend:
+  frontend:

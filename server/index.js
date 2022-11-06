@@ -14,8 +14,14 @@ const db = mysql.createConnection({
     port: 3306
 });
 
-app.get('/', () => {
-    db.query('SELECT name, description FROM materials')
+app.get('/materials', (req,res) => {
+    db.query('SELECT name, description FROM materials',(err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
 });
 
 app.post('/create', (req,res) => {

@@ -1,8 +1,11 @@
 import { useState } from "react";
+import "../assets/style.css";
 
 function GestionMaterial() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+
+    const [materialsList, setMaterialsList] = useState([]);
 
     const addMaterial = () => {
         fetch('http://localhost:3001/create', {
@@ -15,12 +18,13 @@ function GestionMaterial() {
 
         })
     };
-    const getMateriel = () => {
-        fetch('http://localhost:3001/', {
+
+    const getMaterials = () => {
+        fetch('http://localhost:3001/materials', {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: name, description: description })
-        })
+        }).then(response => response.json())
+        .then(response => setMaterialsList(response))
     }
     return (
         <div className="container">
@@ -32,27 +36,44 @@ function GestionMaterial() {
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    <h2>Afficher le matériel</h2>
+                    <button onClick={getMaterials}>Afficher le matériel</button>
+                    <table>
+                                <tbody>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Description</th>
+                                </tr>
+                    {materialsList.map((val,key)=> {
+                        return (
+                                <tr>
+                                    <td>{val.name}</td>
+                                    <td>{val.description}</td>
+                                </tr>
+                                
+                        );
+                    })}
+                    </tbody>
+                    </table>
                 </div>
             </div>
             <hr></hr>
             <div className="row">
                 <div className="col-md-12">
-                <h2>Ajouter du matériel</h2>
-                <form onSubmit={addMaterial}>
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input type="text" onChange={(event) => {
-                            setName(event.target.value);
-                        }} className="form-input" id="name" placeholder="Nom" />
-                        <label>Description</label>
-                        <input type="text" onChange={(event) => {
-                            setDescription(event.target.value);
-                        }} className="form-input" id="description" placeholder="Description" />
-                        <button type="submit" className="btn btn-primary" >Ajouter</button>
-                    </div>
-                </form>
-            </div>
+                    <h2>Ajouter du matériel</h2>
+                    <form onSubmit={addMaterial}>
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input type="text" onChange={(event) => {
+                                setName(event.target.value);
+                            }} className="form-input" id="name" placeholder="Nom" />
+                            <label>Description</label>
+                            <input type="text" onChange={(event) => {
+                                setDescription(event.target.value);
+                            }} className="form-input" id="description" placeholder="Description" />
+                            <button type="submit" className="btn btn-primary" >Ajouter</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
