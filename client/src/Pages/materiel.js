@@ -39,16 +39,21 @@ function GestionMaterial() {
                 );
             });
     }
-    const updateMaterials = () => {
-        fetch(`http://localhost:3001/update/${idmaterial}`,{
+    const updateMaterials = (idmaterials) => {
+        fetch(`http://localhost:3001/update/${idmaterials}`,{
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name, description: description })
-        }).then(() => {
-            console.log("Success");
+        }).then(response => response.json())
+        .then((response) => {
+            setMaterialsList(
+                materialsList.map((val) => {
+                    return val.idmaterials == idmaterials ? {idmaterials: val.idmaterials, name: val.name, description: val.description} : val
+                })
+            );
+        });
+}
 
-        })
-    }
     return (
         <div className="container">
             <div className="row">
@@ -70,8 +75,8 @@ function GestionMaterial() {
                     {materialsList.map((val,key)=> {
                         return (
                                 <tr>
-                                    <td>{val.name}</td>
-                                    <td>{val.description}</td>
+                                    <td><input onChange={(event) => {setName(event.target.value);}} type="text" placeholder={val.name}/></td>
+                                    <td><input onChange={(event) => {setDescription(event.target.value);}} type="text" placeholder={val.description}/></td>
                                     <button onClick={()=> {deleteMaterials(val.idmaterials)}}>Supprimer</button>
                                     <button onClick={()=> {updateMaterials(val.idmaterials)}}>Modifier</button>
                                 </tr>
