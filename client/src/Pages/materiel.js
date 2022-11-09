@@ -97,12 +97,14 @@ function GestionMaterial() {
                             <input type="text" onChange={(event) => {
                                 setName(event.target.value);
                             }} className="form-input" id="name" placeholder="Nom" />
+                        </div>
+                        <div className="form-group">
                             <label>Description</label>
                             <input type="text" onChange={(event) => {
                                 setDescription(event.target.value);
                             }} className="form-input" id="description" placeholder="Description" />
-                            <button type="submit" className="btn btn-primary" >Ajouter</button>
                         </div>
+                            <button type="submit" className="btn btn-primary" >Ajouter</button>
                     </form>
                 </div>
             </div>

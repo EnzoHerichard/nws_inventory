@@ -116,6 +116,16 @@ app.delete('/delete/:idmaterials', (req, res) => {
         }
     })
 });
+app.delete('/deleteReservation/:idreservation', (req, res) => {
+    const idreservation = req.params.idreservation;
+    db.query('DELETE FROM reservations WHERE idreservation = ?', idreservation, (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+});
 
 
 

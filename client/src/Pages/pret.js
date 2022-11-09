@@ -35,6 +35,19 @@ function GestionPret(){
         }).then(response => response.json())
         .then(response => setReservationList(response))
     } 
+    const deleteReservation = (idreservation) => {
+        fetch(`http://localhost:3001/deleteReservation/${idreservation}`, {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" },
+    }).then(response => response.json())
+            .then((response) => {
+                setReservationList(
+                    reservationList.filter((val) => {
+                        return val.idreservation !== idreservation;
+                    })
+                );
+            });
+        }
     return (
         <div className="container">
             <div className="row">
@@ -52,22 +65,32 @@ function GestionPret(){
                             <input type="text" onChange={(event) => {
                                 setFirstName(event.target.value);
                             }} className="form-input" id="firstName" placeholder="Prénom" />
+                        </div>
+                        <div className="form-group">
                             <label>Nom</label>
                             <input type="text" onChange={(event) => {
                                 setLastName(event.target.value);
                             }} className="form-input" id="lastName" placeholder="Nom de famille" />
+                        </div>
+                        <div className="form-group">
                             <label>Email</label>
                             <input type="text" onChange={(event) => {
                                 setEmail(event.target.value);
                             }} className="form-input" id="email" placeholder="Email" />
+                        </div>
+                        <div className="form-group">
                             <label>Date du prêt</label>
                             <input type="date" onChange={(event) => {
                                 setDateDeb(event.target.value);
                             }} className="form-input" id="dateDeb" />
+                        </div>
+                        <div className="form-group">
                             <label>Date de rendu du materiel</label>
                             <input type="date" onChange={(event) => {
                                 setDateFin(event.target.value);
                             }} className="form-input" id="dateFin" />
+                        </div>
+                        <div className="form-group">
                             <label>Materiel prêté</label>
                             <select onChange={(event) => {
                                             setIdmaterials(event.target.value);
@@ -80,8 +103,8 @@ function GestionPret(){
                                     );
                                 })}
                             </select>
-                            <button type="submit" className="btn btn-primary" >Ajouter</button>
                         </div>
+                            <button type="submit" className="btn btn-primary" >Ajouter</button>
                     </form>
                 </div>
             </div>
@@ -106,11 +129,13 @@ function GestionPret(){
                                     <td>{val.firstName}</td>
                                     <td>{val.lastName}</td>
                                     <td>{val.email}</td>
-                                    <td>{val.dateDeb.toLocaleDateString("fr")}</td>
-                                    <td>{val.dateFin.toLocaleDateString("fr")}</td>
+                                    <td>{val.dateDeb}</td>
+                                    <td>{val.dateFin}</td>
                                     <td>{val.name}</td>
-                                    <button /*onClick={()=> {deleteMaterials(val.idmaterials)}}*/>Terminer</button> 
-                                    <button onClick={()=> {updateMaterials(val.idmaterials)}}>Rappeler</button>
+                                    <td>
+                                        <button onClick={()=> {deleteReservation(val.idreservation)}}>Terminer</button> 
+                                        <button>Rappeler</button>
+                                    </td>
                                 </tr>
                             ); 
                         })}
