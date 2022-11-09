@@ -34,7 +34,7 @@ function GestionMaterial() {
             .then((response) => {
                 setMaterialsList(
                     materialsList.filter((val) => {
-                        return val.idmaterials != idmaterials;
+                        return val.idmaterials !== idmaterials;
                     })
                 );
             });
@@ -48,7 +48,7 @@ function GestionMaterial() {
         .then((response) => {
             setMaterialsList(
                 materialsList.map((val) => {
-                    return val.idmaterials == idmaterials ? {idmaterials: val.idmaterials, name: val.name, description: val.description} : val
+                    return val.idmaterials === idmaterials ? {idmaterials: val.idmaterials, name: val.name, description: val.description} : val
                 })
             );
         });
