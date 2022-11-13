@@ -142,9 +142,10 @@ app.delete('/deleteReservation/:idreservation', (req, res) => {
 
 });
 
-
-
-const server = app.listen(3001, function() {
+app.listen(3001,function() {
     console.log('Server listening on port 3001')
 })
-module.exports = server;
+/* const server = app.listen(3001, function() {
+    console.log('Server listening on port 3001')
+})
+module.exports = server; */
