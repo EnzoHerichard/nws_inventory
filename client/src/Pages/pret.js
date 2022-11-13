@@ -15,7 +15,7 @@ function GestionPret() {
     const [reservationList, setReservationList] = useState([]);
 
     const addReservation = ()  =>{
-        fetch('https://enzo.iamroot.fr:3001/createReservation', {
+        fetch('https://enzo.iamroot.fr/createReservation', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             headers: {
@@ -27,7 +27,7 @@ function GestionPret() {
     });
     }
     const getMaterialsNotReserved = () => {
-        fetch('https://enzo.iamroot.fr:3001/materialsNR', {
+        fetch('https://enzo.iamroot.fr/materialsNR', {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
             headers: {
@@ -37,7 +37,7 @@ function GestionPret() {
             .then(response => setMaterialsList(response))
     }
     const getReservation = () => {
-        fetch('https://enzo.iamroot.fr:3001/reservations', {
+        fetch('https://enzo.iamroot.fr/reservations', {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
             headers: {
@@ -47,7 +47,7 @@ function GestionPret() {
             .then(response => setReservationList(response))
     }
     const deleteReservation = (idreservation) => {
-        fetch(`https://enzo.iamroot.fr:3001/deleteReservation/${idreservation}`, {
+        fetch(`https://enzo.iamroot.fr/deleteReservation/${idreservation}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             headers: {
