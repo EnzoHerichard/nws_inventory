@@ -11,7 +11,6 @@ function GestionMaterial() {
     const addMaterial = () =>{
         fetch('https://enzo.iamroot.fr/create', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -26,7 +25,6 @@ function GestionMaterial() {
     const getMaterials = () => {
         fetch('https://enzo.iamroot.fr/materials', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
