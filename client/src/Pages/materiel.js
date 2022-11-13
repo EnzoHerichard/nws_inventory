@@ -87,7 +87,7 @@ useEffect(()=>{
                                     <th>Déscription</th>
                                     <th>Action</th>
                                 </tr>
-                    {materialsList.map((val,key)=> {
+                    {materialsList?.map((val,key)=> {
                         return (
                                 <tr>
                                     <td><input onChange={(event) => {setName(event.target.value);}} type="text" placeholder={val.name}/></td>
