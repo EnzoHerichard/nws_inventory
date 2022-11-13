@@ -15,32 +15,44 @@ function GestionPret() {
     const [reservationList, setReservationList] = useState([]);
 
     const addReservation = ()  =>{
-        fetch('https://enzo.iam.root.fr:3001/createReservation', {
+        fetch('https://enzo.iamroot.fr:3001/createReservation', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
             body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials })
         }).then(()=> {
             console.log('success');    
     });
     }
     const getMaterialsNotReserved = () => {
-        fetch('https://enzo.iam.root.fr:3001/materialsNR', {
+        fetch('https://enzo.iamroot.fr:3001/materialsNR', {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
         }).then(response => response.json())
             .then(response => setMaterialsList(response))
     }
     const getReservation = () => {
-        fetch('https://enzo.iam.root.fr:3001/reservations', {
+        fetch('https://enzo.iamroot.fr:3001/reservations', {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
     const deleteReservation = (idreservation) => {
-        fetch(`https://enzo.iam.root.fr:3001/deleteReservation/${idreservation}`, {
+        fetch(`https://enzo.iamroot.fr:3001/deleteReservation/${idreservation}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
         }).then(response => response.json())
             .then((response) => {
                 setReservationList(
