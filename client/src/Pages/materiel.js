@@ -29,7 +29,7 @@ function GestionMaterial() {
                 "Access-Control-Allow-Origin": "*",
               },
         }).then(response => response.text())
-        .then(response => setMaterialsList(response))
+        .then(response => setMaterialsList(response.response))
     }
     const deleteMaterials = (idmaterials) => {
         fetch(`https://enzo.iamroot.fr/delete/${idmaterials}`, {
