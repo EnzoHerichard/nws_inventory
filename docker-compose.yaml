@@ -42,7 +42,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8030:8080
+      - 8040:8080
     depends_on: 
       - db
     networks:
