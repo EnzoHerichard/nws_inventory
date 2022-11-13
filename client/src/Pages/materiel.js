@@ -28,7 +28,7 @@ function GestionMaterial() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
-        }).then(response => response.json())
+        }).then(response => response.text())
         .then(response => setMaterialsList(response))
     }
     const deleteMaterials = (idmaterials) => {
