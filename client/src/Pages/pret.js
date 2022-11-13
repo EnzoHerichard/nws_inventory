@@ -14,29 +14,33 @@ function GestionPret() {
     const form = useRef();
     const [reservationList, setReservationList] = useState([]);
 
-    function addReservation() {
+    const addReservation = ()  =>{
         fetch('http://localhost:3001/createReservation', {
             method: 'POST',
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials })
         }).then(()=> {
             console.log('success');    
     });
     }
-    function getMaterialsNotReserved() {
+    const getMaterialsNotReserved = () => {
         fetch('http://localhost:3001/materialsNR', {
             method: 'GET',
+            headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
             .then(response => setMaterialsList(response))
     }
-    function getReservation() {
+    const getReservation = () => {
         fetch('http://localhost:3001/reservations', {
             method: 'GET',
+            headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
     const deleteReservation = (idreservation) => {
         fetch(`http://localhost:3001/deleteReservation/${idreservation}`, {
             method: 'DELETE',
+            headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
             .then((response) => {
                 setReservationList(
@@ -48,7 +52,7 @@ function GestionPret() {
         
     }
     
-    function sendEmailAdd (e) {
+    const sendEmailAdd = (e) => {
         e.preventDefault();
 
         emailjs.sendForm('service_4cjrsub', 'template_mjb8r6n',form.current, 'QBYjetHMkN7YkkMWd')
@@ -58,7 +62,7 @@ function GestionPret() {
                 console.log('failed..' + error);
             });
     }; 
-    function sendEmailRappel(name,firstName, email, dateFin) {
+    const sendEmailRappel = (name,firstName, email, dateFin) => {
         const params = 
                 {
                     name: name,
