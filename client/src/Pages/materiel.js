@@ -11,7 +11,6 @@ function GestionMaterial() {
     function addMaterial(){
         fetch('http://localhost:3001/create', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name, description: description })
 
         }).then(() => {
@@ -23,7 +22,6 @@ function GestionMaterial() {
     const getMaterials = () => {
         fetch('http://localhost:3001/materials', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
         .then(response => setMaterialsList(response))
     }
@@ -43,7 +41,6 @@ function GestionMaterial() {
     const updateMaterials = (idmaterials) => {
         fetch(`http://localhost:3001/update/${idmaterials}`,{
             method: 'PUT',
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name, description: description })
         }).then(response => response.json())
         .then((response) => {

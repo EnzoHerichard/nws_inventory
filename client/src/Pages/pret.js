@@ -17,7 +17,6 @@ function GestionPret() {
     function addReservation() {
         fetch('http://localhost:3001/createReservation', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials })
         }).then(()=> {
             console.log('success');    
@@ -26,21 +25,18 @@ function GestionPret() {
     function getMaterialsNotReserved() {
         fetch('http://localhost:3001/materialsNR', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
             .then(response => setMaterialsList(response))
     }
     function getReservation() {
         fetch('http://localhost:3001/reservations', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
     const deleteReservation = (idreservation) => {
         fetch(`http://localhost:3001/deleteReservation/${idreservation}`, {
             method: 'DELETE',
-            headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
             .then((response) => {
                 setReservationList(
