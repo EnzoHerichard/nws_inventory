@@ -14,6 +14,15 @@ const db = mysql.createConnection({
     port: 3306,
 });
 
+//For testing and local development
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'nwsmaterials',
+//     port: 3306,
+// });
+
 app.get('/materials', (req,res) => {
     db.query('SELECT * FROM materials',(err, result) => {
         if (err) {
@@ -130,6 +139,7 @@ app.delete('/deleteReservation/:idreservation', (req, res) => {
 
 
 
-app.listen(3001, () => {
+const server = app.listen(3001, function() {
     console.log('Server listening on port 3001')
 })
+module.exports = server;

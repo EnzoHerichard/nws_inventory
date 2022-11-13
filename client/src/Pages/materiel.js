@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../assets/style.css";
+// module.exports = app.listen(3001);
 
 function GestionMaterial() {
     const [name, setName] = useState('');
@@ -7,7 +8,7 @@ function GestionMaterial() {
 
     const [materialsList, setMaterialsList] = useState([]);
 
-    const addMaterial = () => {
+    function addMaterial(){
         fetch('http://localhost:3001/create', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
@@ -53,6 +54,10 @@ function GestionMaterial() {
             );
         });
 }
+useEffect(()=>{
+    getMaterials()
+})
+
 
     return (
         <div className="container">
@@ -64,7 +69,7 @@ function GestionMaterial() {
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    <button onClick={getMaterials}>Afficher le matériel</button>
+                    {/* <button onClick={getMaterials} className="btn btn-dark">Afficher le matériel</button> */}
                     <table>
                                 <tbody>
                                 <tr>
@@ -77,8 +82,8 @@ function GestionMaterial() {
                                 <tr>
                                     <td><input onChange={(event) => {setName(event.target.value);}} type="text" placeholder={val.name}/></td>
                                     <td><input onChange={(event) => {setDescription(event.target.value);}} type="text" placeholder={val.description}/></td>
-                                    <button onClick={()=> {deleteMaterials(val.idmaterials)}}>Supprimer</button>
-                                    <button onClick={()=> {updateMaterials(val.idmaterials)}}>Modifier</button>
+                                    <button onClick={()=> {updateMaterials(val.idmaterials)}} className="btn btn-warning">Modifier</button>
+                                    <button onClick={()=> {deleteMaterials(val.idmaterials)}} className="btn btn-danger">Supprimer</button>
                                 </tr>
                                 
                         );
@@ -87,7 +92,7 @@ function GestionMaterial() {
                     </table>
                 </div>
             </div>
-            <hr></hr>
+            <div className="clear"></div>
             <div className="row">
                 <div className="col-md-12">
                     <h2>Ajouter du matériel</h2>

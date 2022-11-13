@@ -1,6 +1,7 @@
-import { useState,useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../assets/style.css";
 import emailjs from '@emailjs/browser';
+// module.exports = app.listen(3001);
 
 function GestionPret() {
     const [firstName, setFirstName] = useState('');
@@ -13,25 +14,23 @@ function GestionPret() {
     const form = useRef();
     const [reservationList, setReservationList] = useState([]);
 
-    const addReservation = () => {
+    function addReservation() {
         fetch('http://localhost:3001/createReservation', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials })
-
         }).then(()=> {
-            console.log('success');
-            
+            console.log('success');    
     });
     }
-    const getMaterialsNotReserved = () => {
+    function getMaterialsNotReserved() {
         fetch('http://localhost:3001/materialsNR', {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         }).then(response => response.json())
             .then(response => setMaterialsList(response))
     }
-    const getReservation = () => {
+    function getReservation() {
         fetch('http://localhost:3001/reservations', {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
@@ -53,18 +52,17 @@ function GestionPret() {
         
     }
     
-   const sendEmailAdd = (e) => {
+    function sendEmailAdd (e) {
         e.preventDefault();
 
-        emailjs.sendForm('service_4cjrsub', 'template_mjb8r6n',form, 'QBYjetHMkN7YkkMWd')
+        emailjs.sendForm('service_4cjrsub', 'template_mjb8r6n',form.current, 'QBYjetHMkN7YkkMWd')
             .then((result) => {
                 console.log(result.text);
             }, (error) => {
                 console.log('failed..' + error);
             });
     }; 
-        
-    const sendEmailRappel = (name,firstName, email, dateFin) => {
+    function sendEmailRappel(name,firstName, email, dateFin) {
         const params = 
                 {
                     name: name,
@@ -79,6 +77,9 @@ function GestionPret() {
                 console.log('failed..' + error);
             });
     };
+    useEffect(()=>{
+        getReservation()
+    })
     return (
         <div className="container">
             <div className="row">
@@ -89,8 +90,42 @@ function GestionPret() {
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    <h2>Ajouter du matériel</h2>
-                    <form ref={form} onSubmit={addReservation}> 
+                    {/* <button type="button" className="btn btn-dark" onClick={getReservation}>Voir les prêts en cours</button> */}
+                    <table >
+                        <tbody>
+                            <tr>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Date du prêt</th>
+                                <th>Date de rendu</th>
+                                <th>Materiel emprunté</th>
+                                <th>Action</th>
+                            </tr>
+
+                            {reservationList.map((val, key) => {
+                                return (
+                                    <tr>
+                                        <td>{val.firstName}</td>
+                                        <td>{val.lastName}</td>
+                                        <td>{val.email}</td>
+                                        <td>{val.dateDeb}</td>
+                                        <td>{val.dateFin}</td>
+                                        <td>{val.name}</td>
+                                        <button onClick={() => { deleteReservation(val.idreservation) }} className="btn btn-success">Terminer</button>
+                                        <button onClick={() =>sendEmailRappel(val.name,val.firstName, val.email,val.dateFin)} className="btn btn-warning">Rappeler</button>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div className="clear"></div>
+            <div className="row">
+                <div className="col-md-12">
+                    <h2>Ajouter un prêt</h2>
+                    <form ref={form} onSubmit={addReservation} onSubmitCapture={sendEmailAdd}> 
                         <div className="form-group">
                             <label>Prénom</label>
                             <input type="text" onChange={(event) => {
@@ -122,8 +157,8 @@ function GestionPret() {
                             }} className="form-control" name="dateFin" id="dateFin" />
                         </div>
                         <div className="form-group">
-                            <label>Materiel prêté</label>
-                            <select onChange={(event) => {
+                            <label>Materiel en stock</label>
+                            <select className="form-control" onChange={(event) => {
                                 setIdmaterials(event.target.value);
                             }} onClick={getMaterialsNotReserved}>
                                 <option value="">--Please choose an option--</option>
@@ -137,45 +172,6 @@ function GestionPret() {
                         </div>
                         <button type="submit" className="btn btn-primary"> Ajouter</button>
                     </form> 
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-12">
-                    <button onClick={getReservation}>Afficher les prêts</button>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Email</th>
-                                <th>Date du prêt</th>
-                                <th>Date de rendu</th>
-                                <th>Materiel emprunté</th>
-                                <th>Action</th>
-                            </tr>
-
-                            {reservationList.map((val, key) => {
-                                return (
-                                    <tr>
-                                        <td id="firstName">{val.firstName}</td>
-                                        <td>{val.lastName}</td>
-                                        <td id="email">{val.email}</td>
-                                        <td>{val.dateDeb}</td>
-                                        <td id="dateFin">{val.dateFin}</td>
-                                        <td>{val.name}</td>
-                                        <td>
-                                            <button onClick={() => { deleteReservation(val.idreservation) }}>Terminer</button>
-                                            <button onClick={() =>sendEmailRappel(val.name,val.firstName, val.email,val.dateFin)}>Rappeler</button>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-
-
-
-
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
