@@ -79,7 +79,7 @@ function GestionPret() {
     };
     useEffect(()=>{
         getReservation()
-    })
+    },[])
     return (
         <div className="container">
             <div className="row">

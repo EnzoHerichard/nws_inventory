@@ -56,7 +56,7 @@ function GestionMaterial() {
 }
 useEffect(()=>{
     getMaterials()
-})
+},[])
 
 
     return (
