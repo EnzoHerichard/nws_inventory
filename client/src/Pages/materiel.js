@@ -28,13 +28,12 @@ function GestionMaterial() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
-        }).then(response => response.text())
-        .then(response => setMaterialsList(response.response))
+        }).then(response => response.json())
+        .then(response => setMaterialsList(response))
     }
     const deleteMaterials = (idmaterials) => {
         fetch(`https://enzo.iamroot.fr/delete/${idmaterials}`, {
             method: 'DELETE',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -50,7 +49,6 @@ function GestionMaterial() {
     const updateMaterials = (idmaterials) => {
         fetch(`https://enzo.iamroot.fr/update/${idmaterials}`,{
             method: 'PUT',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -87,7 +85,7 @@ useEffect(()=>{
                                     <th>Déscription</th>
                                     <th>Action</th>
                                 </tr>
-                    {materialsList?.map((val,key)=> {
+                    {materialsList.map((val,key)=> {
                         return (
                                 <tr>
                                     <td><input onChange={(event) => {setName(event.target.value);}} type="text" placeholder={val.name}/></td>

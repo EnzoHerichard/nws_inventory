@@ -17,7 +17,6 @@ function GestionPret() {
     const addReservation = ()  =>{
         fetch('https://enzo.iamroot.fr/createReservation', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -29,7 +28,6 @@ function GestionPret() {
     const getMaterialsNotReserved = () => {
         fetch('https://enzo.iamroot.fr/materialsNR', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -39,7 +37,6 @@ function GestionPret() {
     const getReservation = () => {
         fetch('https://enzo.iamroot.fr/reservations', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -49,7 +46,6 @@ function GestionPret() {
     const deleteReservation = (idreservation) => {
         fetch(`https://enzo.iamroot.fr/deleteReservation/${idreservation}`, {
             method: 'DELETE',
-            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
