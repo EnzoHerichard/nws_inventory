@@ -19,7 +19,7 @@ const db = mysql.createConnection({
     port: 3306,
 });
 
-//For testing and local development
+
 // const db = mysql.createConnection({
 //     host: 'localhost',
 //     user: 'root',
@@ -142,10 +142,10 @@ app.delete('/deleteReservation/:idreservation', (req, res) => {
 
 });
 
-app.listen(3001,function() {
+/* app.listen(3001,function() {
+    console.log('Server listening on port 3001')
+}) */
+const server = app.listen(3001, function() {
     console.log('Server listening on port 3001')
 })
-/* const server = app.listen(3001, function() {
-    console.log('Server listening on port 3001')
-})
-module.exports = server; */
+module.exports = server;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../assets/style.css";
-// module.exports = app.listen(3001);
+/* module.exports = app.listen(3001); */
 
 function GestionMaterial() {
     const [name, setName] = useState('');
@@ -11,6 +11,7 @@ function GestionMaterial() {
     const addMaterial = () =>{
         fetch('https://enzo.iamroot.fr/create', {
             method: 'POST',
+            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -25,6 +26,7 @@ function GestionMaterial() {
     const getMaterials = () => {
         fetch('https://enzo.iamroot.fr/materials', {
             method: 'GET',
+            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -34,6 +36,7 @@ function GestionMaterial() {
     const deleteMaterials = (idmaterials) => {
         fetch(`https://enzo.iamroot.fr/delete/${idmaterials}`, {
             method: 'DELETE',
+            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
@@ -49,6 +52,7 @@ function GestionMaterial() {
     const updateMaterials = (idmaterials) => {
         fetch(`https://enzo.iamroot.fr/update/${idmaterials}`,{
             method: 'PUT',
+            headers: { "Content-Type": "application/json" },
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
