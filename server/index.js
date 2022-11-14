@@ -27,7 +27,12 @@ const db = mysql.createConnection({
 //     database: 'nwsmaterials',
 //     port: 3306,
 // });
-
+app.get("/", (req, res) => {
+    res.status(200).json({
+      status: 'ok',
+      message: 'Hello! I am the root!'
+    });
+  });
 app.get('/materials', (req,res) => {
     db.query('SELECT * FROM materials',(err, result) => {
         if (err) {
