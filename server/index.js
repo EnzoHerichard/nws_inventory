@@ -82,7 +82,7 @@ app.post('/create', (req,res) => {
             } else {
                 res.send('Values inserted')
             }
-});
+})
 });
 app.post('/createReservation', (req,res) => {
     const firstName = req.body.firstName;
@@ -101,11 +101,11 @@ app.post('/createReservation', (req,res) => {
             } else {
                 res.send('Values inserted')
             }
-});
+})
     db.query(
         'UPDATE materials SET isreserved = 1 WHERE idmaterials = ?',
         [idmaterials]
-    );
+    )
 });
 
 app.put('/update/:idmaterials', (req,res) => {
@@ -122,7 +122,7 @@ app.put('/update/:idmaterials', (req,res) => {
                 res.send(result)
             }
         }
-    );
+    )
 });
 
 app.delete('/delete/:idmaterials', (req, res) => {
