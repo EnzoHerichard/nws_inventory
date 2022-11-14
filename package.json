@@ -1,4 +1,5 @@
 {
+  "homepage": ".",
   "main": "index.js",
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
