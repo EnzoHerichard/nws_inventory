@@ -19,7 +19,8 @@ services:
     working_dir: /api
     command: node index.js
     depends_on:
-      - db
+      db:
+        condition: service_completed_successfully
     ports:
       - "3001:3001"
   db:
@@ -31,8 +32,6 @@ services:
     restart: always
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
     environment:
         MYSQL_DATABASE: 'nwsmaterials'
         MYSQL_ROOT_PASSWORD: 'root'
