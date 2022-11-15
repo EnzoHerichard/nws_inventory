@@ -12,10 +12,7 @@ function GestionMaterial() {
         fetch('https://enzo.iamroot.fr/server/create', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-              },
-            body: JSON.stringify({ name: name, description: description })
+            body: {name: name, description: description}
 
         }).then(() => {
             console.log("Success");
@@ -56,7 +53,7 @@ function GestionMaterial() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
-            body: JSON.stringify({ name: name, description: description })
+            body: { name: name, description: description }
         }).then(response => response.json())
         .then((response) => {
             setMaterialsList(

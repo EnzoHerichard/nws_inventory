@@ -21,7 +21,7 @@ function GestionPret() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
-            body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials })
+            body: { firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials }
         }).then(()=> {
             console.log('success');    
     });
