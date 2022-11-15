@@ -19,6 +19,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
     working_dir: /api
+    command: node index.js
     depends_on:
       - db
     ports:
