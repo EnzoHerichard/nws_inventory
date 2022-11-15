@@ -12,8 +12,6 @@ services:
       DB_HOST: mysql://db:3306
     ports:
       - "3000:3000"
-    networks:
-      - frontend  
   api:
     build:
       context: ./server
@@ -24,9 +22,6 @@ services:
       - db
     ports:
       - "3001:3001"
-    networks:
-      - backend
-      - frontend  
   db:
     volumes:
       - db-data:/var/lib/mysql
@@ -39,10 +34,5 @@ services:
     environment:
         MYSQL_DATABASE: 'nwsmaterials'
         MYSQL_ROOT_PASSWORD: 'root'
-    networks:
-      - backend
 volumes:
   db-data:
-networks:
-  backend:
-  frontend:
