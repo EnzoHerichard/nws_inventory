@@ -16,7 +16,6 @@ services:
       - frontend  
   api:
     build:
-      context: .
       dockerfile: Dockerfile.api
     working_dir: /app
     command: node index.js
