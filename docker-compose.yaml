@@ -2,7 +2,6 @@ version: '3'
 services:
   app:
     build: 
-      context: ./client
       dockerfile: Dockerfile.app
     working_dir: /app
     command: npm start
@@ -16,7 +15,6 @@ services:
       - frontend  
   api:
     build:
-      context: ./server
       dockerfile: Dockerfile.api
     working_dir: /api
     command: node index.js
