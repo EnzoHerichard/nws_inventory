@@ -19,7 +19,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
     working_dir: /app
-    command: node index.js
+    command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; node index.js'
     depends_on:
       - db
     ports:
