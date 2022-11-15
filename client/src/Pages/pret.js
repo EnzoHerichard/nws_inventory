@@ -17,11 +17,8 @@ function GestionPret() {
     const addReservation = ()  =>{
         fetch('https://enzo.iamroot.fr/server/createReservation', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-              },
-            body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials})
         }).then(()=> {
             console.log('success');    
     });
@@ -29,30 +26,21 @@ function GestionPret() {
     const getMaterialsNotReserved = () => {
         fetch('https://enzo.iamroot.fr/server/materialsNR', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-              },
+            headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then(response => setMaterialsList(response))
     }
     const getReservation = () => {
         fetch('https://enzo.iamroot.fr/server/reservations', {
             method: 'GET',
-            headers: { "Content-Type": "application/json" },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-              },
+            headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
     const deleteReservation = (idreservation) => {
         fetch(`https://enzo.iamroot.fr/server/deleteReservation/${idreservation}`, {
             method: 'DELETE',
-            headers: { "Content-Type": "application/json" },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-              },
+            headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then((response) => {
                 setReservationList(
