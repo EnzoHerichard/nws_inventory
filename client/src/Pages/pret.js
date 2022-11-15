@@ -15,7 +15,7 @@ function GestionPret() {
     const [reservationList, setReservationList] = useState([]);
 
     const addReservation = ()  =>{
-        fetch('https://enzo.iamroot.fr/server/createReservation', {
+        fetch('http://localhost:3001/createReservation', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials})
@@ -24,21 +24,21 @@ function GestionPret() {
     });
     }
     const getMaterialsNotReserved = () => {
-        fetch('https://enzo.iamroot.fr/server/materialsNR', {
+        fetch('http://localhost:3001/materialsNR', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then(response => setMaterialsList(response))
     }
     const getReservation = () => {
-        fetch('https://enzo.iamroot.fr/server/reservations', {
+        fetch('http://localhost:3001/reservations', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
     const deleteReservation = (idreservation) => {
-        fetch(`https://enzo.iamroot.fr/server/deleteReservation/${idreservation}`, {
+        fetch(`http://localhost:3001/deleteReservation/${idreservation}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())

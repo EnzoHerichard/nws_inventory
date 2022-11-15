@@ -2,7 +2,8 @@ version: '3'
 services:
   app:
     build: 
-      dockerfile: Dockerfile.app
+      context: ./client
+      dockerfile: Dockerfile
     working_dir: /app
     command: npm start
     depends_on:
@@ -15,8 +16,9 @@ services:
       - frontend  
   api:
     build:
-      dockerfile: Dockerfile.api
-    working_dir: /app
+      context: ./server
+      dockerfile: Dockerfile
+    working_dir: /api
     command: node index.js
     depends_on:
       - db
