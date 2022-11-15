@@ -31,7 +31,7 @@ function GestionPret() {
             .then(response => setMaterialsList(response))
     }
     const getReservation = () => {
-        fetch('https://.iamroot.fr/server/reservations', {
+        fetch('https://enzo.iamroot.fr/server/reservations', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
