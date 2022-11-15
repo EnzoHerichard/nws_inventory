@@ -16,7 +16,7 @@ services:
   api:
     build:
       dockerfile: Dockerfile.api
-    working_dir: /api
+    working_dir: /app
     command: node index.js
     depends_on:
       - db
