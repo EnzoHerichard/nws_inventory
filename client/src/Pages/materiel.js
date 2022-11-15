@@ -9,7 +9,7 @@ function GestionMaterial() {
     const [materialsList, setMaterialsList] = useState([]);
 
     const addMaterial = () =>{
-        fetch('https://enzo.iamroot.fr/server/create', {
+        fetch('http://localhost:3001/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({name: name, description: description})
@@ -20,7 +20,7 @@ function GestionMaterial() {
     };
 
     const getMaterials = () => {
-        fetch('https://enzo.iamroot.fr/server/materials', {
+        fetch('http://localhost:3001/materials', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             headers: {
@@ -30,7 +30,7 @@ function GestionMaterial() {
         .then(response => setMaterialsList(response))
     }
     const deleteMaterials = (idmaterials) => {
-        fetch(`https://enzo.iamroot.fr/server/delete/${idmaterials}`, {
+        fetch(`http://localhost:3001/delete/${idmaterials}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             headers: {
@@ -46,7 +46,7 @@ function GestionMaterial() {
             });
     }
     const updateMaterials = (idmaterials) => {
-        fetch(`https://enzo.iamroot.fr/server/update/${idmaterials}`,{
+        fetch(`http://localhost:3001/update/${idmaterials}`,{
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name, description: description })
