@@ -18,7 +18,6 @@ services:
       dockerfile: Dockerfile
     working_dir: /api
     command: node index.js
-    restart: on-failure
     depends_on:
       - db
     ports:
