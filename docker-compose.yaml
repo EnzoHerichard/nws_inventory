@@ -19,8 +19,7 @@ services:
     working_dir: /api
     command: node index.js
     depends_on:
-      db:
-        condition: service_completed_successfully
+      - db
     ports:
       - "3001:3001"
   db:
