@@ -19,7 +19,8 @@ services:
     working_dir: /api
     command: node index.js
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "3001:3001"
   db:
@@ -34,5 +35,10 @@ services:
     environment:
         MYSQL_DATABASE: 'nwsmaterials'
         MYSQL_ROOT_PASSWORD: 'root'
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
+      interval: 30s
+      timeout: 10s
+      retries: 5
 volumes:
   db-data:
