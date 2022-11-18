@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS `nwsmaterials`;
-CREATE DATABASE IF NOT EXISTS nwsmaterials;
+CREATE DATABASE nwsmaterials;
 
 USE `nwsmaterials`;
 
