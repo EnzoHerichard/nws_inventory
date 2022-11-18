@@ -19,8 +19,8 @@ services:
       retries: 5
   app:
     build: 
-      context: ./client
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.app
     working_dir: /app
     command: npm start
     depends_on:
@@ -31,8 +31,8 @@ services:
       - "3000:3000"
   api:
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.api
     working_dir: /api
     command: node index.js
     restart: unless-stopped
