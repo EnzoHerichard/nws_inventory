@@ -1,3 +1,8 @@
+on: [push]
+
+name: Build
+
+jobs:
 build-docker:
     runs-on: ubuntu-latest
     steps:
