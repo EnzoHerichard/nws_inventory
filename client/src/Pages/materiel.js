@@ -7,9 +7,14 @@ function GestionMaterial() {
     const [description, setDescription] = useState('');
 
     const [materialsList, setMaterialsList] = useState([]);
-
+    const url = ""
+    if(window.location.hostname === "localhost"){
+        url = "http://localhost:3001";
+    } else {
+        url = "https://enzo.iamroot.fr/server"
+    }
     const addMaterial = () =>{
-        fetch('https://enzo.iamroot.fr/server/create', {
+        fetch(`${url}/create`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({name: name, description: description})
@@ -20,7 +25,7 @@ function GestionMaterial() {
     };
 
     const getMaterials = () => {
-        fetch('https://enzo.iamroot.fr/server/materials', {
+        fetch(`${url}/materials`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             headers: {
@@ -30,7 +35,7 @@ function GestionMaterial() {
         .then(response => setMaterialsList(response))
     }
     const deleteMaterials = (idmaterials) => {
-        fetch(`https://enzo.iamroot.fr/server/delete/${idmaterials}`, {
+        fetch(`${url}/delete/${idmaterials}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             headers: {
@@ -46,7 +51,7 @@ function GestionMaterial() {
             });
     }
     const updateMaterials = (idmaterials) => {
-        fetch(`https://enzo.iamroot.fr/server/update/${idmaterials}`,{
+        fetch(`${url}/update/${idmaterials}`,{
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name, description: description })
@@ -74,7 +79,6 @@ useEffect(()=>{
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    {/* <button onClick={getMaterials} className="btn btn-dark">Afficher le matériel</button> */}
                     <table>
                                 <tbody>
                                 <tr>

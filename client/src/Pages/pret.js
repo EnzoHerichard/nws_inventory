@@ -13,9 +13,14 @@ function GestionPret() {
     const [materialsList, setMaterialsList] = useState([]);
     const form = useRef();
     const [reservationList, setReservationList] = useState([]);
-
+    const url = ""
+    if(window.location.hostname === "localhost"){
+        url = "http://localhost:3001";
+    } else {
+        url = "https://enzo.iamroot.fr/server"
+    }
     const addReservation = ()  =>{
-        fetch('https://enzo.iamroot.fr/server/createReservation', {
+        fetch(`${url}/createReservation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials})
@@ -24,21 +29,21 @@ function GestionPret() {
     });
     }
     const getMaterialsNotReserved = () => {
-        fetch('https://enzo.iamroot.fr/server/materialsNR', {
+        fetch(`${url}/materialsNR`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then(response => setMaterialsList(response))
     }
     const getReservation = () => {
-        fetch('https://enzo.iamroot.fr/server/reservations', {
+        fetch(`${url}/reservations`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
     const deleteReservation = (idreservation) => {
-        fetch(`https://enzo.iamroot.fr/server/deleteReservation/${idreservation}`, {
+        fetch(`${url}/deleteReservation/${idreservation}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
@@ -90,7 +95,6 @@ function GestionPret() {
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    {/* <button type="button" className="btn btn-dark" onClick={getReservation}>Voir les prêts en cours</button> */}
                     <table >
                         <tbody>
                             <tr>
