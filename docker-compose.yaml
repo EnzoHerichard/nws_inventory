@@ -1,5 +1,22 @@
 version: '3'
 services:
+  db:
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    image: mysql:8
+    #command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+        MYSQL_DATABASE: 'nwsmaterials'
+        MYSQL_ROOT_PASSWORD: 'root'
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
+      interval: 30s
+      timeout: 10s
+      retries: 5
   app:
     build: 
       context: ./client
@@ -18,27 +35,11 @@ services:
       dockerfile: Dockerfile
     working_dir: /api
     command: node index.js
+    restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
     ports:
       - "3001:3001"
-  db:
-    volumes:
-      - db-data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    image: mysql:8
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    ports:
-      - "3306:3306"
-    environment:
-        MYSQL_DATABASE: 'nwsmaterials'
-        MYSQL_ROOT_PASSWORD: 'root'
-    healthcheck:
-      test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
-      interval: 30s
-      timeout: 10s
-      retries: 5
 volumes:
   db-data:
