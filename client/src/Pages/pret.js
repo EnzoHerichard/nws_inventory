@@ -90,7 +90,6 @@ function GestionPret() {
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    {/* <button type="button" className="btn btn-dark" onClick={getReservation}>Voir les prêts en cours</button> */}
                     <table >
                         <tbody>
                             <tr>

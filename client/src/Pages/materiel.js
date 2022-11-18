@@ -74,7 +74,6 @@ useEffect(()=>{
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    {/* <button onClick={getMaterials} className="btn btn-dark">Afficher le matériel</button> */}
                     <table>
                                 <tbody>
                                 <tr>
