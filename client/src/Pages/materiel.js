@@ -11,7 +11,7 @@ function GestionMaterial() {
     if(window.location.hostname === "localhost"){
         url = "http://localhost:3001";
     } else {
-        url = "https://enzo.iamroot.fr/server"
+        url = "https://enzo.iamroot.fr/server";
     }
     const addMaterial = () =>{
         fetch(`${url}/create`, {
