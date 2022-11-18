@@ -13,7 +13,7 @@ function GestionPret() {
     const [materialsList, setMaterialsList] = useState([]);
     const form = useRef();
     const [reservationList, setReservationList] = useState([]);
-    const url = ""
+    var url = ""
     if(window.location.hostname === "localhost"){
         url = "http://localhost:3001";
     } else {
