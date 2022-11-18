@@ -12,9 +12,15 @@ jobs:
             registry: ghcr.io
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
-        - name: Build and push to GitHub registry
+        - name: Build and push to GitHub registry api
           uses: docker/build-push-action@v3
           with:
             push: true
-            tags: ghcr.io/enzoherichard/nodejs:latest
-            target: nodejs
+            tags: ghcr.io/enzoherichard/api
+            target: api
+        - name: Build and push to GitHub registry app
+          uses: docker/build-push-action@v3
+          with:
+            push: true
+            tags: ghcr.io/enzoherichard/app
+            target: app
