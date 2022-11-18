@@ -16,5 +16,5 @@ jobs:
           uses: docker/build-push-action@v3
           with:
             push: true
-            tags: ghcr.io/EnzoHerichard/nodejs:latest
+            tags: ghcr.io/enzoherichard/nodejs:latest
             target: nodejs
