@@ -14,5 +14,6 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
-          
+
       - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "ls"
+      - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ansible && ansible-playbook docker.yaml --extra-vars \"git_repo=https://github.com/EnzoHerichard/nws_inventory.git working_dir=../nws_inventory\""
