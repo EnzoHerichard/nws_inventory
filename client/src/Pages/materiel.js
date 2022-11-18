@@ -7,7 +7,7 @@ function GestionMaterial() {
     const [description, setDescription] = useState('');
 
     const [materialsList, setMaterialsList] = useState([]);
-    const url = ""
+    var url = "";
     if(window.location.hostname === "localhost"){
         url = "http://localhost:3001";
     } else {
