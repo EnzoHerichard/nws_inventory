@@ -1,6 +1,6 @@
 FROM node:19
 
-COPY . /app
+COPY ./client .
 WORKDIR /app
 
 RUN npm install

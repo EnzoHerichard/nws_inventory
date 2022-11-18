@@ -1,6 +1,6 @@
 FROM node:19
 
-COPY . /api
+COPY ./server .
 WORKDIR /api
 
 RUN npm install
