@@ -28,9 +28,6 @@ function GestionMaterial() {
         fetch(`${url}/materials`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-              },
         }).then(response => response.json())
         .then(response => setMaterialsList(response))
     }
@@ -38,9 +35,6 @@ function GestionMaterial() {
         fetch(`${url}/delete/${idmaterials}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-              },
         }).then(response => response.json())
             .then((response) => {
                 setMaterialsList(
