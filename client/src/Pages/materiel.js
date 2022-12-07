@@ -83,8 +83,8 @@ useEffect(()=>{
                     {materialsList.map((val,key)=> {
                         return (
                                 <tr>
-                                    <td><input onChange={(event) => {setName(event.target.value);}} type="text" placeholder={val.name}/></td>
-                                    <td><input onChange={(event) => {setDescription(event.target.value);}} type="text" placeholder={val.description}/></td>
+                                    <td><input onChange={(event) => {setName(event.target.value);}} type="text" placeholder={val.name} required/></td>
+                                    <td><input onChange={(event) => {setDescription(event.target.value);}} type="text" placeholder={val.description} required/></td>
                                     <button onClick={()=> {updateMaterials(val.idmaterials)}} className="btn btn-warning">Modifier</button>
                                     <button onClick={()=> {deleteMaterials(val.idmaterials)}} className="btn btn-danger">Supprimer</button>
                                 </tr>

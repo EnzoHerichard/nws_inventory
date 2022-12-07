@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../assets/style.css";
 import emailjs from '@emailjs/browser';
 
@@ -12,6 +13,10 @@ function GestionPret() {
     const [materialsList, setMaterialsList] = useState([]);
     const form = useRef();
     const [reservationList, setReservationList] = useState([]);
+    const [studentList, setStudentList] = useState([]);
+    const navigate = useNavigate();
+
+
     var url = ""
     if(window.location.hostname === "localhost"){
         url = "http://localhost:3001";
@@ -24,7 +29,7 @@ function GestionPret() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials})
         }).then(()=> {
-            console.log('success');    
+            console.log('success'); 
     });
     }
     const getMaterialsNotReserved = () => {
@@ -41,6 +46,13 @@ function GestionPret() {
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
+    /* const getStudent = () => {
+        fetch('http://vps-a47222b1.vps.ovh.net:4242/student' , {
+            method: 'GET',
+            headers: 'Access-Control-*'
+        }).then(response => response.json())
+            .then(response => console.log(response))
+    } */
     const deleteReservation = (idreservation) => {
         fetch(`${url}/deleteReservation/${idreservation}`, {
             method: 'DELETE',
@@ -82,7 +94,8 @@ function GestionPret() {
             });
     };
     useEffect(()=>{
-        getReservation()
+        getReservation();
+        getStudent();
     },[])
     return (
         <div className="container">
@@ -123,6 +136,28 @@ function GestionPret() {
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div>
+                <h2>Les eleves</h2>
+                <table >
+                        <tbody>
+                            <tr>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                            </tr>
+                            {studentList.map((val, key)=> {
+                                return (
+                                <tr>
+                                    <td>{val.nom}</td>
+                                    <td>{val.prenom}</td>
+                                    <td>{val.mail}</td>
+                                </tr>
+                                    
+                                );
+                            })}
+                        </tbody>
+                </table>
             </div>
             <div className="clear"></div>
             <div className="row">
