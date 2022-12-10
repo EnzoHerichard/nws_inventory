@@ -25,5 +25,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: latest
-      - run: cd ../ && cd server && npm i
+      - run: cd server && npm ci
       - run: npm run test
