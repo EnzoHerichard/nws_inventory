@@ -10,12 +10,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-        MYSQL_USER: 'enzo'
-        MYSQL_PASSWORD: 'herichard'
         MYSQL_DATABASE: 'nwsmaterials'
         MYSQL_ROOT_PASSWORD: 'root'
     healthcheck:
-      test: "/usr/bin/mysql --user=enzo --password=herichard --execute \"SHOW DATABASES;\""
+      test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
       interval: 30s
       timeout: 10s
       retries: 5

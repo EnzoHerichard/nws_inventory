@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const swaggerUi = require('swagger-ui-express');
 const mysql = require('mysql2');
 const cors = require('cors');
 app.use(cors());
@@ -7,8 +8,8 @@ app.use(express.json());
 
 const db = mysql.createConnection({
     host: 'db',
-    user: 'enzo',
-    password: 'herichard',
+    user: 'root',
+    password: 'root',
     database: 'nwsmaterials',
     port: 3306,
 });
@@ -141,10 +142,19 @@ app.delete('/deleteReservation/:idreservation', (req, res) => {
 
 });
 
+app.get("/Student", swaggerUi.setup(null, {
+    swaggerOptions: {
+        requestInterceptor: function(request){
+            request.headers.Origin = `*`;
+            return request;
+        },
+        url: `http://localhost:3001/Student`
+    }
+}))
 app.listen(3001,function() {
     console.log('Server listening on port 3001')
 })
-/* const server = app.listen(3001, function() {
-    console.log('Server listening on port 3001')
-})
-module.exports = server; */
+const server = app.listen((5000), function() {
+    console.log('Server listening on port 5000')
+}) 
+module.exports = server;

@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../assets/style.css";
 import emailjs from '@emailjs/browser';
 
@@ -14,7 +13,6 @@ function GestionPret() {
     const form = useRef();
     const [reservationList, setReservationList] = useState([]);
     const [studentList, setStudentList] = useState([]);
-    const navigate = useNavigate();
 
 
     var url = ""
@@ -46,13 +44,13 @@ function GestionPret() {
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
-    /* const getStudent = () => {
-        fetch('http://vps-a47222b1.vps.ovh.net:4242/student' , {
+    const getStudent = () => {
+        fetch('http://vps-a47222b1.vps.ovh.net:4242/Student' , {
             method: 'GET',
-            headers: 'Access-Control-*'
+            headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
             .then(response => console.log(response))
-    } */
+    }
     const deleteReservation = (idreservation) => {
         fetch(`${url}/deleteReservation/${idreservation}`, {
             method: 'DELETE',
@@ -95,7 +93,7 @@ function GestionPret() {
     };
     useEffect(()=>{
         getReservation();
-        getStudent();
+        /* getStudent(); */
     },[])
     return (
         <div className="container">

@@ -37,7 +37,7 @@ describe('POST /createReservation', function () {
         request(app)
            .post('/createReservation')
            .send({firstName: 'Enzo', lastName: 'Herichard',email:'herichardenzo@gmail.com', dateDeb: '2022-11-06', dateFin: '2022-12-07'})
-           .expect(200, done)  
+           .expect(201, done)  
     })
 })
 describe('GET /reservations', function () {
