@@ -1,6 +1,6 @@
 on: workflow_dispatch
 
-name: Deploy
+name: Test & Deploy
 
 jobs:
   deploy:
@@ -18,3 +18,12 @@ jobs:
       - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker compose -f docker-compose.prod.yaml pull"
       - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker compose -f docker-compose.prod.yaml up -d --remove-orphans"
       - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker image prune -f"
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      - run: cd server && npm i
+      - run: npm run test

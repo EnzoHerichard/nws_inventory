@@ -6,31 +6,38 @@ const { expect } = require("chai");
 
 chai.use(chaiHttp);
 
-let materialLength
-
-describe('POST /create', function (done) {
-    it('should create a new material', function () {
-        request(app)
-           .post('/create')
-           .send({"name": 'Iphone', "description": 'Abimé'})
-           .set('Accept', 'application/json')
-           .expect('Content-Type', /json/)
-           .expect(200, done)  
-    })
-})
-
 describe('GET /materials', function (done) {
-    it('should get the materials', function () {
+    it('status code = 200', function () {
         chai
             .request(app)
             .get('/materials')
             .end((err, res) => {
-                expect(res).to.have.property("statusCode", 200);
+                expect(res).to.have.status(200);
                 done();
                 materialLength = res.body.length;
               });
     })
+    it('Should get the materials', function () {
+        chai
+            .request(app)
+            .get("/materials")
+            .end((err, res) => {
+              expect(res.body).to.have.lengthOf(materialLength);
+              done();
+            });
+    })
 })
+/* describe('POST /create', function (done) {
+    it('should create a new material', function () {
+        request(app)
+            .post('/create')
+            .send({"name": 'Iphone', "description": 'Abimé'})
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(res).to.have.status(200);
+    })
+}) */
+
 describe('PUT /update', function (done) {
     it('should update a material', function () {
         request(app)
