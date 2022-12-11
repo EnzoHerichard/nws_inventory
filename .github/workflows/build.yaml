@@ -4,7 +4,7 @@ name: Build & test
 
 jobs:
   test:
-    name: Tests /api
+    name: Tests 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
