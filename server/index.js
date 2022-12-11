@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const swaggerUi = require('swagger-ui-express');
 const mysql = require('mysql2');
 const cors = require('cors');
 app.use(cors());
@@ -142,7 +141,7 @@ app.delete('/deleteReservation/:idreservation', (req, res) => {
 
 });
 
-app.get("/Student", swaggerUi.setup(null, {
+/* app.get("/Student", swaggerUi.setup(null, {
     swaggerOptions: {
         requestInterceptor: function(request){
             request.headers.Origin = `*`;
@@ -150,7 +149,7 @@ app.get("/Student", swaggerUi.setup(null, {
         },
         url: `http://vps-a47222b1.vps.ovh.net:4242/Student`
     }
-}))
+})) */
 app.listen(3001,function() {
     console.log('Server listening on port 3001')
 })
