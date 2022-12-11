@@ -3,7 +3,16 @@ on: [push]
 name: Build & test
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test API with docker-compose
+      - uses: actions/checkout@v3
+      - run: docker-compose up -d
+      - run: docker exec api npm run test
+      - run: docker-compose down
   build-docker:
+      needs: test
       runs-on: ubuntu-latest
       steps:
         - name: Login to GitHub Container Registry
@@ -24,12 +33,3 @@ jobs:
             push: true
             tags: ghcr.io/enzoherichard/app
             target: app
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test API with docker-compose
-      - uses: actions/checkout@v3
-      - run: docker-compose up -d
-      - run: docker exec api npm run test
-      - run: docker-compose down
