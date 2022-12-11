@@ -154,7 +154,7 @@ app.get("/Student", swaggerUi.setup(null, {
 app.listen(3001,function() {
     console.log('Server listening on port 3001')
 })
-const server = app.listen((5000), function() {
+const server = app.listen(5000, function() {
     console.log('Server listening on port 5000')
 }) 
 module.exports = server;

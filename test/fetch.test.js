@@ -4,7 +4,6 @@ const chaiHttp = require("chai-http");
 const { expect } = require("chai");
 
 chai.use(chaiHttp);
-
 describe('GET /materials', function (done) {
     it('status code = 200', function () {
         chai
