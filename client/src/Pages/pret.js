@@ -45,7 +45,7 @@ function GestionPret() {
             .then(response => setReservationList(response))
     }
     const getStudent = () => {
-        fetch('http://vps-a47222b1.vps.ovh.net:4242/Student' , {
+        fetch('http://localhost:3001/Student' , {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => response.json())
@@ -93,7 +93,7 @@ function GestionPret() {
     };
     useEffect(()=>{
         getReservation();
-        /* getStudent(); */
+        getStudent();
     },[])
     return (
         <div className="container">

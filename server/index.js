@@ -148,7 +148,7 @@ app.get("/Student", swaggerUi.setup(null, {
             request.headers.Origin = `*`;
             return request;
         },
-        url: `http://localhost:3001/Student`
+        url: `http://vps-a47222b1.vps.ovh.net:4242/Student`
     }
 }))
 app.listen(3001,function() {
