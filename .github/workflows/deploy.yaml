@@ -3,6 +3,16 @@ on: workflow_dispatch
 name: Test & Deploy
 
 jobs:
+test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: chmod 0777 ./node_modules/.bin/mocha
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      - run: npm install
+      - run: npm run test
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -16,12 +26,4 @@ jobs:
       - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker compose -f docker-compose.prod.yaml pull"
       - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker compose -f docker-compose.prod.yaml up -d --remove-orphans"
       - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker image prune -f"
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: latest
-      - run: npm install
-      - run: npm run test
+  
