@@ -1,7 +1,7 @@
 {
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --exit"
+    "test": "mocha --exit"
   },
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
