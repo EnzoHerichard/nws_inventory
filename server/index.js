@@ -6,22 +6,22 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({
+/* const db = mysql.createConnection({
     host: 'db',
     user: 'root',
     password: 'root',
     database: 'nwsmaterials',
     port: 3306,
+}); */
+
+
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'nwsmaterials',
+    port: 3306,
 });
-
-
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'nwsmaterials',
-//     port: 3306,
-// });
 app.get("/", (req, res) => {
     res.status(200).json({
       status: 'ok',
