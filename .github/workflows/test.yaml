@@ -3,12 +3,11 @@ on: [push]
 name: Test
 
 jobs:
-  test:
+  Test-api:
+    name: Test API with docker-compose
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: latest
-      - run: npm i -g mocha
-      - run: npm run test
+      - run: docker-compose up -d
+      - run: docker exec api npm run test
+      - run: docker-compose down
