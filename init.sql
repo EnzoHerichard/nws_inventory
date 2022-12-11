@@ -23,9 +23,9 @@ INSERT INTO `materials` (`idmaterials`, `name`, `description`, `isreserved`) VAL
 DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
   `idreservation` int NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(100) DEFAULT NULL,
-  `lastName` varchar(100) DEFAULT NULL,
-  `email` varchar(256) DEFAULT NULL,
+  /* `firstName` varchar(100) DEFAULT NULL,
+  `lastName` varchar(100) DEFAULT NULL,*/
+  `idStudent` int DEFAULT NULL,
   `dateDeb` date DEFAULT NULL,
   `dateFin` date DEFAULT NULL,
   `idmaterials` int DEFAULT NULL,
@@ -35,6 +35,8 @@ CREATE TABLE `reservations` (
   CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`idmaterials`) REFERENCES `materials` (`idmaterials`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `reservations` (`idreservation`, `idStudent`, `dateDeb`, `dateFin`,'idmaterials') VALUES
+(1,	2,'22-12-2022',	'24-12-2022',1);
 
 DELIMITER ;;
 

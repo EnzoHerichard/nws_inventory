@@ -3,12 +3,10 @@ import "../assets/style.css";
 import emailjs from '@emailjs/browser';
 
 function GestionPret() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
     const [dateDeb, setDateDeb] = useState('');
     const [dateFin, setDateFin] = useState('');
     const [idmaterials, setIdmaterials] = useState('');
+    const [idStudent, setIdStudent] = useState('');
     const [materialsList, setMaterialsList] = useState([]);
     const form = useRef();
     const [reservationList, setReservationList] = useState([]);
@@ -25,7 +23,7 @@ function GestionPret() {
         fetch(`${url}/createReservation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials})
+            body: JSON.stringify({idStudent: idStudent, dateDeb: dateDeb, dateFin: dateFin, idmaterials: idmaterials})
         }).then(()=> {
             console.log('success'); 
     });
@@ -44,13 +42,7 @@ function GestionPret() {
         }).then(response => response.json())
             .then(response => setReservationList(response))
     }
-    const getStudent = () => {
-        fetch('http://localhost:3001/Student' , {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        }).then(response => response.json())
-            .then(response => console.log(response))
-    }
+    
     const deleteReservation = (idreservation) => {
         fetch(`${url}/deleteReservation/${idreservation}`, {
             method: 'DELETE',
@@ -65,7 +57,13 @@ function GestionPret() {
             })
         
     }
-    
+    const getStudent = () => {
+        fetch(`${url}/Student`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        }).then(response => response.json())
+            .then(response => setStudentList(response.data))
+    }
     const sendEmailAdd = (e) => {
         e.preventDefault();
 
@@ -76,12 +74,9 @@ function GestionPret() {
                 console.log('failed..' + error);
             });
     }; 
-    const sendEmailRappel = (name,firstName, email, dateFin) => {
+    const sendEmailRappel = (dateFin) => {
         const params = 
                 {
-                    name: name,
-                    firstName: firstName,
-                    email: email,
                     dateFin: dateFin
                 }
         emailjs.send('service_4cjrsub', 'template_whstm9w', params, 'QBYjetHMkN7YkkMWd')
@@ -108,9 +103,7 @@ function GestionPret() {
                     <table >
                         <tbody>
                             <tr>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Email</th>
+                                <th>Id de l'étudiant</th>
                                 <th>Date du prêt</th>
                                 <th>Date de rendu</th>
                                 <th>Materiel emprunté</th>
@@ -120,14 +113,12 @@ function GestionPret() {
                             {reservationList.map((val, key) => {
                                 return (
                                     <tr>
-                                        <td>{val.firstName}</td>
-                                        <td>{val.lastName}</td>
-                                        <td>{val.email}</td>
+                                        <td>{val.idStudent}</td>
                                         <td>{val.dateDeb}</td>
                                         <td>{val.dateFin}</td>
                                         <td>{val.name}</td>
                                         <button onClick={() => { deleteReservation(val.idreservation) }} className="btn btn-success">Terminer</button>
-                                        <button onClick={() =>sendEmailRappel(val.name,val.firstName, val.email,val.dateFin)} className="btn btn-warning">Rappeler</button>
+                                        <button onClick={() =>sendEmailRappel(val.dateFin)} className="btn btn-warning">Rappeler</button>
                                     </tr>
                                 );
                             })}
@@ -135,34 +126,12 @@ function GestionPret() {
                     </table>
                 </div>
             </div>
-            <div>
-                <h2>Les eleves</h2>
-                <table >
-                        <tbody>
-                            <tr>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Email</th>
-                            </tr>
-                            {studentList.map((val, key)=> {
-                                return (
-                                <tr>
-                                    <td>{val.nom}</td>
-                                    <td>{val.prenom}</td>
-                                    <td>{val.mail}</td>
-                                </tr>
-                                    
-                                );
-                            })}
-                        </tbody>
-                </table>
-            </div>
             <div className="clear"></div>
             <div className="row">
                 <div className="col-md-12">
                     <h2>Ajouter un prêt</h2>
                     <form ref={form} onSubmit={addReservation} onSubmitCapture={sendEmailAdd}> 
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <label>Prénom</label>
                             <input type="text" onChange={(event) => {
                                 setFirstName(event.target.value);
@@ -179,6 +148,20 @@ function GestionPret() {
                             <input type="text" onChange={(event) => {
                                 setEmail(event.target.value);
                             }} className="form-control" name="email" id="email" placeholder="Email" />
+                        </div> */}
+                        <div className="form-group">
+                        <label>Selectionnez un étudiant</label>
+                        <select className="form-control" onChange={(event) => {
+                                setIdStudent(event.target.value);
+                            }} onClick={getStudent}>
+                                <option value="">--Please choose an option--</option>
+                                {studentList.map((value, key ) => {
+                                    return (
+
+                                        <option value={value.id} ><p name="lastName">{value.nom} </p><p name="firstName"> {value.prenom}</p></option>
+                                    );
+                                })}
+                        </select>
                         </div>
                         <div className="form-group">
                             <label>Date du prêt</label>

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql2');
 const cors = require('cors');
+const axios = require('axios');
 app.use(cors());
 app.use(express.json());
 
@@ -12,7 +13,6 @@ const db = mysql.createConnection({
     database: 'nwsmaterials',
     port: 3306,
 });
-
 
 /* const db = mysql.createConnection({
     host: 'localhost',
@@ -79,16 +79,17 @@ app.post('/create', (req,res) => {
 })
 });
 app.post('/createReservation', (req,res) => {
-    const firstName = req.body.firstName;
+   /*  const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const email = req.body.email;
+    const email = req.body.email; */
+    const idStudent = req.body.idStudent;
     const dateDeb = req.body.dateDeb;
     const dateFin = req.body.dateFin;
     const idmaterials = req.body.idmaterials;
     console.log(req.body)
     db.query(
-        'INSERT INTO reservations (firstName, lastName, email, dateDeb, dateFin, idmaterials) VALUES (?,?,?,?,?,?)',
-        [firstName, lastName, email, dateDeb, dateFin, idmaterials],
+        'INSERT INTO reservations (idStudent, dateDeb, dateFin, idmaterials) VALUES (?,?,?,?)',
+        [idStudent, dateDeb, dateFin, idmaterials],
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -141,15 +142,21 @@ app.delete('/deleteReservation/:idreservation', (req, res) => {
 
 });
 
-/* app.get("/Student", swaggerUi.setup(null, {
-    swaggerOptions: {
-        requestInterceptor: function(request){
-            request.headers.Origin = `*`;
-            return request;
-        },
-        url: `http://vps-a47222b1.vps.ovh.net:4242/Student`
+app.get('/Student', (req,res) => {
+    try {
+        axios.get("http://vps-a47222b1.vps.ovh.net:4242/Student")
+        .then((response) => {
+            const students = response.data
+            if (students) {
+                res.json({
+                    data: students
+                })
+            }
+        });
+    } catch (err) {
+        console.error(err);
     }
-})) */
+});
 app.listen(3001,function() {
     console.log('Server listening on port 3001')
 })
