@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: docker-compose up -d
+      - run: docker-compose down
+      - run: docker-compose up -d --build
       - run: docker exec api npm run test
       - run: docker-compose down

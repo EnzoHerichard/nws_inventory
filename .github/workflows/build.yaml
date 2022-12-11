@@ -3,14 +3,6 @@ on: [push]
 name: Build & test
 
 jobs:
-  test:
-    name: Tests 
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: docker-compose up -d --build
-      - run: docker exec api npm run test
-      - run: docker-compose down
   build-docker:
       needs: test
       runs-on: ubuntu-latest
