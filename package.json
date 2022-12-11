@@ -1,9 +1,14 @@
 {
   "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive --exit"
+  },
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
     "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
     "emailjs-com": "^3.2.0",
+    "mocha": "^10.2.0",
     "swagger-ui-express": "^4.6.0"
   }
 }
