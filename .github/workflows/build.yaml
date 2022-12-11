@@ -4,9 +4,9 @@ name: Build & test
 
 jobs:
   test:
+    name: Tests /api
     runs-on: ubuntu-latest
     steps:
-      - name: Test API with docker-compose
       - uses: actions/checkout@v3
       - run: docker-compose up -d
       - run: docker exec api npm run test
