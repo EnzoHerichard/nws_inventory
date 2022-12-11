@@ -1,9 +1,9 @@
 const app = require('../index.js');
-/* const chai = require("chai");
+const chai = require("chai");
 const chaiHttp = require("chai-http");
-const { expect } = require("chai"); */
-const request = require('supertest');
-/* chai.use(chaiHttp); */
+const { expect } = require("chai");
+/* const request = require('supertest'); */
+chai.use(chaiHttp);
 
 describe('GET /materials', function (done) {
     it('status code = 200', function () {

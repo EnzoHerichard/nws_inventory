@@ -151,17 +151,17 @@ app.get("/Student", swaggerUi.setup(null, {
         url: `http://vps-a47222b1.vps.ovh.net:4242/Student`
     }
 }))
-/* app.listen(3001,function() {
+app.listen(3001,function() {
     console.log('Server listening on port 3001')
 })
 const server = app.listen(5000, function() {
     console.log('Server listening on port 5000')
 }) 
-module.exports = server; */
-if (require.main === module) {
+module.exports = server;
+/* if (require.main === module) {
     app.listen(3001, () => {
         console.log(`Server listening on port 3001`);
     });
 }
 
-module.exports = app;
+module.exports = app; */
