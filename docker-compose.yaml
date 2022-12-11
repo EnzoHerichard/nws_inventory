@@ -5,6 +5,7 @@ services:
       - db-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     image: mysql:8
+    container_name: db
     #command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
     ports:
@@ -22,6 +23,7 @@ services:
       context: .
       target: app
     working_dir: /app
+    container_name: app
     depends_on:
       - db
     environment:
@@ -33,6 +35,7 @@ services:
       context: .
       target: api
     working_dir: /api
+    container_name: api
     restart: unless-stopped
     depends_on:
       db:
