@@ -3,16 +3,16 @@ on: [push]
 name: Build & test
 
 jobs:
-  Test-api:
-      name: Test API with docker-compose
+  Test:
+      name: Npm run test docker
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
-        - run: docker-compose up -d 
+        - run: docker-compose up -d --build
         - run: docker exec api npm run test
         - run: docker-compose down
   build-docker:
-      needs: Test-api
+      needs: Test
       runs-on: ubuntu-latest
       steps:
         - name: Login to GitHub Container Registry
