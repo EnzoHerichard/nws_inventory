@@ -12,13 +12,13 @@ CREATE TABLE `materials` (
   `description` varchar(45) DEFAULT NULL,
   `isreserved` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`idmaterials`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `materials` (`idmaterials`, `name`, `description`, `isreserved`) VALUES
-(2,	'Ipad',	'64go',	0),
-(6,	'test',	'test',	0),
-(7,	'Pc',	'Lenovo 15pouces',	0),
-(8,	'Chargeur Iphone',	'2m',	0);
+(1,	'Ipad',	'64go',	0),
+(2,	'test',	'test',	0),
+(3,	'Pc',	'Lenovo 15pouces',	0),
+(4,	'Chargeur Iphone',	'2m',	0);
 
 DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
@@ -30,13 +30,11 @@ CREATE TABLE `reservations` (
   `dateFin` date DEFAULT NULL,
   `idmaterials` int DEFAULT NULL,
   PRIMARY KEY (`idreservation`),
-  KEY `idMaterials` (`idmaterials`),
-  CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`idmaterials`) REFERENCES `materials` (`idmaterials`),
-  CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`idmaterials`) REFERENCES `materials` (`idmaterials`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  FOREIGN KEY (`idmaterials`) REFERENCES `materials` (`idmaterials`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `reservations` (`idreservation`, `idStudent`, `dateDeb`, `dateFin`,'idmaterials') VALUES
-(1,	2,'22-12-2022',	'24-12-2022',1);
+INSERT INTO `reservations` (`idreservation`, `idStudent`, `dateDeb`, `dateFin`,`idmaterials`) VALUES
+(1,	2,'2022-12-02',	'2022-12-03',1);
 
 DELIMITER ;;
 
