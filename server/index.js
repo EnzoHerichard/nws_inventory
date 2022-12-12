@@ -157,17 +157,10 @@ app.get('/Student', (req,res) => {
         console.error(err);
     }
 });
-app.listen(3001,function() {
-    console.log('Server listening on port 3001')
-})
-const server = app.listen(5000, function() {
-    console.log('Server listening on port 5000')
-}) 
-module.exports = server;
-/* if (require.main === module) {
+if (require.main === module) {
     app.listen(3001, () => {
-        console.log(`Server listening on port 3001`);
+        console.log(`Server listening`);
     });
 }
 
-module.exports = app; */
+module.exports = app;
