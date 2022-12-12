@@ -4,7 +4,6 @@ name: Build & test
 
 jobs:
   build-docker:
-      needs: Test
       runs-on: ubuntu-latest
       steps:
         - name: Login to GitHub Container Registry
