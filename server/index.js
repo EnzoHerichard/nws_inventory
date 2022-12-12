@@ -157,9 +157,10 @@ app.get('/Student', (req,res) => {
         console.error(err);
     }
 });
+const port = process.env.SERVER_PORT || 5000;
 if (require.main === module) {
-    app.listen(3001, () => {
-        console.log(`Server listening`);
+    app.listen(port, () => {
+        console.log(`Server listening on ${port}`);
     });
 }
 

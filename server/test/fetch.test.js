@@ -12,18 +12,7 @@ describe('GET /materials', function (done) {
             .get('/materials')
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                done();
-                materialLength = res.body.length;
               });
-    })
-    it('Should get the materials', function () {
-        chai
-            .request(app)
-            .get("/materials")
-            .end((err, res) => {
-              expect(res.body).to.have.lengthOf(materialLength);
-              done();
-            });
     })
 })
 /* describe('POST /create', function (done) {
@@ -53,7 +42,6 @@ describe('DELETE /delete/:id', function (done) {
             .delete('/delete/1')
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                done();
               });
     })
 })
@@ -73,8 +61,6 @@ describe('GET /reservations', function (done) {
             .get('/reservations')
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                done();
-                reservationsLength = res.body.length;
               });
     })
 })
@@ -85,7 +71,6 @@ describe('GET /materialsNR', function (done) {
             .get('/materialsNR')
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                done();
               });
     })
 })
@@ -96,8 +81,6 @@ describe('DELETE /deleteReservation/:id', function (done) {
             .delete('/deleteReservation/1')
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                done();
-                materialLength = res.body.length;
               });
     })
 })
