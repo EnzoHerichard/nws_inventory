@@ -35,7 +35,7 @@ describe('GET /materials', function (done) {
         .expect(200,done)
 })
 }) */
-describe('DELETE /delete/:id', function (done) {
+/* describe('DELETE /delete/:id', function (done) {
     it('should delete a material', function () {
         chai
             .request(app)
@@ -44,7 +44,7 @@ describe('DELETE /delete/:id', function (done) {
                 expect(res).to.have.status(200);
               });
     })
-})
+}) */
 /* describe('POST /createReservation', function (done) {
     it('should create a new reservation', function () {
         chai
