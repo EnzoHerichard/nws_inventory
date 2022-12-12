@@ -3,15 +3,6 @@ on: [push]
 name: Build & test
 
 jobs:
-  Test:
-      name: Npm run test docker
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - run: docker-compose down -v
-        - run: docker-compose up -d --build
-        - run: docker exec api npm run test
-        - run: docker-compose down
   build-docker:
       needs: Test
       runs-on: ubuntu-latest
@@ -34,3 +25,12 @@ jobs:
             push: true
             tags: ghcr.io/enzoherichard/app
             target: app
+#  Test:
+#       name: Npm run test docker
+#       runs-on: ubuntu-latest
+#       steps:
+#         - uses: actions/checkout@v3
+#         - run: docker-compose down -v
+#         - run: docker-compose up -d --build
+#         - run: docker exec api npm run test
+#         - run: docker-compose down

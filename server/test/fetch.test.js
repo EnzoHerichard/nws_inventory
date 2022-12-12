@@ -1,11 +1,11 @@
 const app = require('../index.js');
-/* const chai = require("chai");
+const chai = require("chai");
 const chaiHttp = require("chai-http");
-const { expect } = require("chai"); */
-const request = require('supertest');
-/* chai.use(chaiHttp); */
+const { expect } = require("chai");
+/* const request = require('supertest'); */
+chai.use(chaiHttp);
 
-/* describe('GET /materials', function (done) {
+describe('GET /materials', function (done) {
     it('status code = 200', function () {
         chai
             .request(app)
@@ -14,16 +14,7 @@ const request = require('supertest');
                 expect(res).to.have.status(200);
               });
     })
-}) */
-describe('GET /materials', (done) => {
-    it('respond with json containing a list of all materials', function () {
-        request(app)
-            .get('/materials')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(200, done);
-    });
-});
+}) 
 
 /* describe('POST /create', function (done) {
     it('should create a new material', function () {
@@ -62,8 +53,9 @@ describe('GET /materials', (done) => {
            .post('/createReservation')
            .send({firstName: 'Enzo', lastName: 'Herichard',email:'herichardenzo@gmail.com', dateDeb: '2022-11-06', dateFin: '2022-12-07'})
            .expect(200, done)  
+    });
     })
-}) 
+}) */
 describe('GET /reservations', function (done) {
     it('should get the reservations', function () {
         chai
@@ -93,4 +85,4 @@ describe('DELETE /deleteReservation/:id', function (done) {
                 expect(res).to.have.status(200);
               });
     })
-})*/
+})
