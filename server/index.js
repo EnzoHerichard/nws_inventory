@@ -24,7 +24,7 @@ const db = mysql.createConnection({
 app.get("/", (req, res) => {
     res.status(200).json({
       status: 'ok',
-      message: 'Hello! I am the root!'
+      message: 'connected'
     });
   });
 app.get('/materials', (req,res) => {

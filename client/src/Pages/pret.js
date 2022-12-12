@@ -64,7 +64,7 @@ function GestionPret() {
         }).then(response => response.json())
             .then(response => setStudentList(response.data))
     }
-    const sendEmailAdd = (e) => {
+    /* const sendEmailAdd = (e) => {
         e.preventDefault();
 
         emailjs.sendForm('service_4cjrsub', 'template_mjb8r6n',form.current, 'QBYjetHMkN7YkkMWd')
@@ -73,7 +73,7 @@ function GestionPret() {
             }, (error) => {
                 console.log('failed..' + error);
             });
-    }; 
+    };  */
     const sendEmailRappel = (dateFin) => {
         const params = 
                 {
@@ -130,25 +130,7 @@ function GestionPret() {
             <div className="row">
                 <div className="col-md-12">
                     <h2>Ajouter un prêt</h2>
-                    <form ref={form} onSubmit={addReservation} onSubmitCapture={sendEmailAdd}> 
-                        {/* <div className="form-group">
-                            <label>Prénom</label>
-                            <input type="text" onChange={(event) => {
-                                setFirstName(event.target.value);
-                            }} className="form-control" name="firstName" id="firstName" placeholder="Prénom" />
-                        </div>
-                        <div className="form-group">
-                            <label>Nom</label>
-                            <input type="text" onChange={(event) => {
-                                setLastName(event.target.value);
-                            }} className="form-control" name="lastName" id="lastName" placeholder="Nom de famille" />
-                        </div>
-                        <div className="form-group">
-                            <label>Email</label>
-                            <input type="text" onChange={(event) => {
-                                setEmail(event.target.value);
-                            }} className="form-control" name="email" id="email" placeholder="Email" />
-                        </div> */}
+                    <form ref={form} onSubmit={addReservation} /* onSubmitCapture={sendEmailAdd} */> 
                         <div className="form-group">
                         <label>Selectionnez un étudiant</label>
                         <select className="form-control" onChange={(event) => {
